@@ -17,3 +17,4 @@ Aplikasi klasifikasi tipe rambut menggunakan AI berbasis TensorFlow dan Flask.
 - Klasifikasi otomatis tipe rambut (Curly, Dreadlocks, Kinky, Straight, Wavy)
 - Rekomendasi perawatan rambut berdasarkan tipe
 "# uas_cv" 
+"# uas_cv" 
