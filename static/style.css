@@ -1,0 +1,473 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* Color Variables - Luxury Earth & Gold Salon */
+:root {
+    --bg-primary: #FAF7F2;      /* Soft warm cream background */
+    --bg-secondary: #FFF;       /* Pure white for cards */
+    --text-primary: #2C2520;     /* Rich warm charcoal */
+    --text-secondary: #6B5E56;   /* Muted brownish-gray */
+    --accent-gold: #C5A880;     /* Soft luxury gold */
+    --accent-gold-dark: #A8885E;/* Darker gold for hover states */
+    --accent-gold-light: #F4EFEB;/* Light gold tint */
+    --dark-charcoal: #1E1A17;    /* Deep dark brown-black */
+    --border-color: #EAE3DA;    /* Cream-gray border */
+    --shadow-sm: 0 4px 6px -1px rgba(107, 94, 86, 0.05), 0 2px 4px -1px rgba(107, 94, 86, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(107, 94, 86, 0.08), 0 4px 6px -2px rgba(107, 94, 86, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(107, 94, 86, 0.1), 0 10px 10px -5px rgba(107, 94, 86, 0.04);
+}
+
+/* Global Reset & Typography */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--dark-charcoal);
+}
+
+/* Base Styles */
+a {
+    color: var(--accent-gold-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--dark-charcoal);
+}
+
+/* Floating Navbar */
+.navbar-custom {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(107, 94, 86, 0.04);
+}
+
+.navbar-custom .navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-charcoal);
+    letter-spacing: 0.5px;
+}
+
+.navbar-custom .navbar-brand span {
+    color: var(--accent-gold);
+}
+
+.btn-nav-custom {
+    background-color: var(--dark-charcoal);
+    color: #FFF !important;
+    border-radius: 30px;
+    padding: 8px 24px;
+    font-weight: 500;
+    border: 1px solid var(--dark-charcoal);
+    transition: all 0.3s ease;
+}
+
+.btn-nav-custom:hover {
+    background-color: transparent;
+    color: var(--dark-charcoal) !important;
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section-custom {
+    padding: 100px 0 80px;
+    background: radial-gradient(circle at top right, var(--accent-gold-light) 0%, var(--bg-primary) 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section-custom h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--dark-charcoal);
+}
+
+.hero-section-custom h1 span {
+    color: var(--accent-gold-dark);
+    font-style: italic;
+}
+
+.hero-section-custom p.lead {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    max-width: 550px;
+    margin-bottom: 35px;
+}
+
+/* Carousel Redesign */
+.carousel-wrapper-custom {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 8px solid #FFF;
+}
+
+.carousel-img-custom {
+    height: 450px;
+    object-fit: cover;
+    filter: brightness(0.95);
+    transition: transform 0.5s ease;
+}
+
+.carousel-wrapper-custom:hover .carousel-img-custom {
+    transform: scale(1.03);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(30, 26, 23, 0.6);
+    padding: 20px;
+    border-radius: 50%;
+    background-size: 50% 50%;
+}
+
+/* Premium Button */
+.btn-gold {
+    background-color: var(--accent-gold);
+    color: #FFF;
+    border: 1px solid var(--accent-gold);
+    border-radius: 30px;
+    padding: 12px 32px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4);
+}
+
+.btn-gold:hover {
+    background-color: var(--accent-gold-dark);
+    border-color: var(--accent-gold-dark);
+    color: #FFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 168, 128, 0.6);
+}
+
+/* Tips & Cards Section */
+.section-title-custom {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title-custom::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-gold);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.tip-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-gold);
+}
+
+.tip-icon-box {
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-gold-light);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent-gold-dark);
+    margin-bottom: 20px;
+}
+
+.tip-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: var(--dark-charcoal);
+}
+
+.tip-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Scanning / Input Interface */
+.scan-container-custom {
+    max-width: 680px;
+    margin: 50px auto;
+    padding: 0 15px;
+}
+
+.glass-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area {
+    border: 2px dashed var(--accent-gold);
+    background-color: var(--accent-gold-light);
+    border-radius: 18px;
+    padding: 40px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.upload-area:hover {
+    background-color: rgba(197, 168, 128, 0.15);
+    border-color: var(--accent-gold-dark);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--accent-gold-dark);
+    margin-bottom: 15px;
+}
+
+.file-input-hidden {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Image Preview Box */
+.preview-container {
+    display: none;
+    margin-top: 25px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 4px solid #FFF;
+    box-shadow: var(--shadow-md);
+    max-width: 100%;
+}
+
+.preview-image {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    display: block;
+}
+
+.btn-remove-preview {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(30, 26, 23, 0.8);
+    color: #FFF;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-remove-preview:hover {
+    background-color: #ff4a4a;
+}
+
+/* Scanning Effect Overlay */
+.scanning-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(30, 26, 23, 0.95);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #FFF;
+    text-align: center;
+    padding: 30px;
+}
+
+.scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+    box-shadow: 0 0 15px var(--accent-gold);
+    animation: scanAnimation 2s infinite ease-in-out;
+}
+
+.spinner-custom {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(197, 168, 128, 0.2);
+    border-top-color: var(--accent-gold);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes scanAnimation {
+    0% { top: 0%; }
+    50% { top: 100%; }
+    100% { top: 0%; }
+}
+
+/* Result Page Styles */
+.result-header-badge {
+    background-color: var(--accent-gold-light);
+    color: var(--accent-gold-dark);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.result-image-box {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 8px solid #FFF;
+    box-shadow: var(--shadow-lg);
+    background-color: #000;
+}
+
+.result-image-box img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Confidence Circular Display */
+.confidence-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--accent-gold-light);
+    border: 1px solid var(--border-color);
+    padding: 15px 25px;
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.confidence-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark-charcoal);
+    line-height: 1;
+}
+
+.confidence-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.2;
+}
+
+.confidence-label strong {
+    color: var(--dark-charcoal);
+    display: block;
+    font-size: 1.05rem;
+}
+
+/* Care Card list */
+.recommendation-card {
+    background-color: var(--bg-secondary);
+    border-left: 5px solid var(--accent-gold);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 16px 16px 0;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.recommendation-card h4 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.recommendation-card p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+}
+
+/* Footer Section */
+.footer-custom {
+    background-color: var(--dark-charcoal);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 40px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-custom hr {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.footer-custom-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #FFF;
+    margin-bottom: 15px;
+}
+
+.footer-custom-logo span {
+    color: var(--accent-gold);
+}
