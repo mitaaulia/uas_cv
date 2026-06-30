@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hair Savvy - Pemindaian Rambut AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Premium CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Floating Luxury Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+            Hair<span>Savvy</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center gap-3">
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold text-dark" href="{{ url_for('home') }}">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-nav-custom" href="{{ url_for('index') }}">Mulai Deteksi</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="scan-container-custom">
+    <div class="text-center my-4">
+        <span class="result-header-badge">AI Scanner</span>
+        <h1 class="h2">Pemindaian Jenis Rambut</h1>
+        <p class="text-muted">Unggah foto rambut Anda secara tegak dan jelas untuk hasil analisis optimal.</p>
+    </div>
+
+    <!-- Upload Card -->
+    <div class="glass-card">
+        <!-- Scanning Screen Overlay -->
+        <div class="scanning-overlay" id="scanningOverlay">
+            <div class="scan-line"></div>
+            <div class="spinner-custom"></div>
+            <h3 class="h5 mb-2">Sedang Menganalisis Rambut</h3>
+            <p class="text-muted mb-0">Teknologi AI kami sedang mengidentifikasi jenis rambut Anda...</p>
+        </div>
+
+        <form action="{{ url_for('scan') }}" method="POST" enctype="multipart/form-data" id="scanForm">
+            <!-- Drag & Drop Upload Area -->
+            <div class="upload-area text-center" id="uploadArea">
+                <input class="file-input-hidden" type="file" name="file" id="fileInput" accept="image/*" required>
+                
+                <!-- Upload prompt screen -->
+                <div id="uploadPrompt">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3 class="h5 text-dark fw-bold mb-2">Seret & Lepas Gambar Di Sini</h3>
+                    <p class="text-muted mb-3">Atau klik untuk menelusuri berkas dari perangkat Anda</p>
+                    <span class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Pilih File</span>
+                </div>
+
+                <!-- Preview screen (hidden initially) -->
+                <div class="preview-container" id="previewContainer">
+                    <img src="" class="preview-image" id="previewImage" alt="Pratinjau Rambut">
+                    <button type="button" class="btn-remove-preview" id="btnRemovePreview" title="Hapus Gambar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Submit action -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-gold px-5 py-3 w-100" id="btnSubmit" disabled>
+                    Mulai Deteksi <i class="fa-solid fa-magnifying-glass-chart ms-2"></i>
+                </button>
+                <div class="mt-3">
+                    <a href="{{ url_for('home') }}" class="text-secondary"><i class="fa-solid fa-arrow-left me-1"></i> Kembali ke Beranda</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer-custom mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <div class="footer-custom-logo">Hair<span>Savvy</span></div>
+                <p class="mb-0">Pindai rambut Anda menggunakan teknologi AI mutakhir.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end mt-4 mt-md-0">
+                <p class="mb-0 text-muted">&copy; 2026 Hair Savvy. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+    const btnRemovePreview = document.getElementById('btnRemovePreview');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const scanForm = document.getElementById('scanForm');
+    const scanningOverlay = document.getElementById('scanningOverlay');
+
+    // Drag and drop stylings
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = 'rgba(197, 168, 128, 0.2)';
+            uploadArea.style.borderColor = 'var(--accent-gold-dark)';
+        }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '';
+            uploadArea.style.borderColor = '';
+        }, false);
+    });
+
+    // Handle dropped file
+    uploadArea.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            handleFileSelect(files[0]);
+        }
+    });
+
+    // Handle normal file selection
+    fileInput.addEventListener('change', (e) => {
+        if (fileInput.files.length > 0) {
+            handleFileSelect(fileInput.files[0]);
+        }
+    });
+
+    function handleFileSelect(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Silakan unggah berkas gambar saja!');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            uploadPrompt.style.display = 'none';
+            previewContainer.style.display = 'block';
+            btnSubmit.disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Handle remove preview
+    btnRemovePreview.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // Avoid triggering file selection window
+        fileInput.value = '';
+        previewImage.src = '';
+        previewContainer.style.display = 'none';
+        uploadPrompt.style.display = 'block';
+        btnSubmit.disabled = true;
+    });
+
+    // Handle form submit to show scanning animation
+    scanForm.addEventListener('submit', (e) => {
+        scanningOverlay.style.display = 'flex';
+        // Allow the form to proceed naturally
+    });
+</script>
+</body>
+</html>
